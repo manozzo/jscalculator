@@ -6,9 +6,10 @@ class Calculator {
   }
 
   clear() {
-    this.smalldisplay = '';
-    this.bigdisplay = '';
+    this.smalldisplay = "";
+    this.bigdisplay = "";
     this.operation = undefined;
+    console.log(this.smalldisplay)
   }
 
   deleteNumbers() {
@@ -27,7 +28,6 @@ class Calculator {
     }
     this.operation = operation;
     this.smalldisplay = this.bigdisplay;
-    // this.smalldisplay = this.bigdisplay.toString() + operation.toString();
     this.bigdisplay = "";
   }
 
