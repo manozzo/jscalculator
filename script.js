@@ -6,12 +6,14 @@ class Calculator {
   }
 
   clear() {
-    this.smalldisplay = "";
-    this.bigdisplay = "";
+    this.smalldisplay = '';
+    this.bigdisplay = '';
     this.operation = undefined;
   }
 
-  deleteNumbers() {}
+  deleteNumbers() {
+    this.bigdisplay = this.bigdisplay.toString().slice(0, -1);
+  }
 
   appendNumber(number) {
     if (number === "." && this.bigdisplay.includes(".")) return;
@@ -25,7 +27,7 @@ class Calculator {
     }
     this.operation = operation;
     this.smalldisplay = this.bigdisplay;
-    this.smalldisplay = this.bigdisplay.toString() + operation.toString();
+    // this.smalldisplay = this.bigdisplay.toString() + operation.toString();
     this.bigdisplay = "";
   }
 
@@ -57,7 +59,13 @@ class Calculator {
 
   updateDisplay() {
     this.bigDisplayTextElement.innerText = this.bigdisplay;
-    this.smallDisplayTextElement.innerText = this.smalldisplay;
+    if (this.operation != null) {
+      this.smallDisplayTextElement.innerText = `${this.smalldisplay} ${this.operation}`;
+    }
+  }
+
+  updateMemo() {
+    this.memo.innerText = this.memo;
   }
 }
 
@@ -68,6 +76,7 @@ const allClear = document.querySelector("[data-all-clear]");
 const equalsButton = document.querySelector("[data-equals]");
 const smallDisplayTextElement = document.querySelector("[data-small-display]");
 const bigDisplayTextElement = document.querySelector("[data-big-display]");
+const memo = document.querySelector("[data-memo]");
 
 const calculator = new Calculator(
   smallDisplayTextElement,
@@ -89,11 +98,17 @@ operationButtons.forEach((button) => {
 });
 
 allClear.addEventListener("click", () => {
-  calculator.clear();
   calculator.updateDisplay();
+  calculator.clear();
 });
 
 equalsButton.addEventListener("click", () => {
   calculator.compute();
+  calculator.updateDisplay();
+  calculator.updateMemo();
+});
+
+deleteButton.addEventListener("click", () => {
+  calculator.deleteNumbers();
   calculator.updateDisplay();
 });
