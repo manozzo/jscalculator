@@ -9,7 +9,6 @@ class Calculator {
     this.smalldisplay = "";
     this.bigdisplay = "";
     this.operation = undefined;
-    console.log(this.smalldisplay)
   }
 
   deleteNumbers() {
@@ -65,7 +64,7 @@ class Calculator {
   }
 
   updateMemo() {
-    this.memo.innerText = this.memo;
+    this.memo = "não ta dando certo esse daqui";
   }
 }
 
@@ -76,7 +75,10 @@ const allClear = document.querySelector("[data-all-clear]");
 const equalsButton = document.querySelector("[data-equals]");
 const smallDisplayTextElement = document.querySelector("[data-small-display]");
 const bigDisplayTextElement = document.querySelector("[data-big-display]");
-const memo = document.querySelector("[data-memo]");
+const memo = document.getElementById("data-memo").textContent;
+
+console.log(memo);
+console.log(smallDisplayTextElement);
 
 const calculator = new Calculator(
   smallDisplayTextElement,
