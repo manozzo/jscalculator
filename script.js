@@ -60,11 +60,17 @@ class Calculator {
     this.bigDisplayTextElement.innerText = this.bigdisplay;
     if (this.operation != null) {
       this.smallDisplayTextElement.innerText = `${this.smalldisplay} ${this.operation}`;
+    } else if (this.operation == undefined) {
+      this.smallDisplayTextElement.innerText = this.smalldisplay;
     }
   }
 
-  updateMemo() {
-    this.memo = "não ta dando certo esse daqui";
+  updateMemo() {    
+    let p = document.createElement("p");
+    let textP = document.createTextNode(this.bigdisplay);
+    p.appendChild(textP);
+    memo.appendChild(p);
+    console.log(this)
   }
 }
 
@@ -75,10 +81,9 @@ const allClear = document.querySelector("[data-all-clear]");
 const equalsButton = document.querySelector("[data-equals]");
 const smallDisplayTextElement = document.querySelector("[data-small-display]");
 const bigDisplayTextElement = document.querySelector("[data-big-display]");
-const memo = document.getElementById("data-memo").textContent;
+const memo = document.getElementById("memo");
 
-console.log(memo);
-console.log(smallDisplayTextElement);
+console.log(memo[0]);
 
 const calculator = new Calculator(
   smallDisplayTextElement,
@@ -100,8 +105,8 @@ operationButtons.forEach((button) => {
 });
 
 allClear.addEventListener("click", () => {
-  calculator.updateDisplay();
   calculator.clear();
+  calculator.updateDisplay();
 });
 
 equalsButton.addEventListener("click", () => {
